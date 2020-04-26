@@ -125,7 +125,7 @@ project "re3"
 	staticruntime "off"
 	
 	filter "configurations:Debug or Release or ReleaseFH"
-		prebuildcommands { "cd \"../librw\" && premake5 " .. _ACTION .. " && msbuild \"build/librw.sln\" /property:Configuration=%{cfg.longname} /property:Platform=\"win-x86-d3d9\"" }
+		links { "librw" }
 		defines { "LIBRW", "RW_D3D9" }
 	
 	filter "configurations:*RW"
@@ -134,7 +134,7 @@ project "re3"
 		linkoptions "/SECTION:_rwcseg,ER!W /MERGE:_rwcseg=.text"
 
 	filter "configurations:*GLFW"
-		prebuildcommands { "cd \"../librw\" && premake5 " .. _ACTION .. " && msbuild \"build/librw.sln\" /property:Configuration=Release /property:Platform=\"win-x86-gl3\"" }
+		links { "librw" }
 		defines { "LIBRW", "RW_GL3" }
 		
 	filter "configurations:Debug*"
